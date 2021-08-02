@@ -26,11 +26,11 @@ Before contributing to the project, you can look at the project's proposal for b
 Every file created inside must have well defined documentation section in the structure below;
 ````
 /******************************************************************************************************
-*   Program name: FILENAME\_HERE,
-*   Author name: AUTHOR\_NAME_HERE, 
-*   Created Path: RELATIVE\_PATH\_OF\_THE\_FILE_HERE,
-*   Created Date: DATE_AND\_TIME\_IN\_THIS\_FORMAT\_HERE (DD MON YYYY, HH:MM:SS),
-*   Description: DECRIPTION\_OF\_THE\_PROJECT\_HERE.
+*   Program name: FILENAME_HERE,
+*   Author name: AUTHOR_NAME_HERE, 
+*   Created Path: RELATIVE_PATH_OF_THE_FILE_HERE,
+*   Created Date: DATE_AND_TIME_IN_THIS_FORMAT_HERE (DD MON YYYY, HH:MM:SS),
+*   Description: DECRIPTION_OF_THE_PROJECT_HERE.
 *   References: REFRENCES (If Any)
 *******************************************************************************************************/
 ````
