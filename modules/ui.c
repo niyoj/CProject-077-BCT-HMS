@@ -48,7 +48,7 @@ void print_instruction(int level) {
             printf("[3] => See todays oncall doctors\n");
             printf("[4] => Clear the screen\n");
             printf("[5] => Change the password\n");
-            printf("[6] => Logout\n");
+            printf("[6] => Logout\n\n\n");
 
         }  else if (strcmp(_env.role, "doctor") == 0) {
             printf("[1] => See my today patients\n");

@@ -135,12 +135,15 @@ int main(void) {
         char c = getchar();
         c = getchar();
         goto instruction_phase;
-    } else if(strcmp(_env.role, "reception")) {
+    } else if(strcmp(_env.role, "reception") == 0) {
         if(i_code == 1) {
             int status = create_patient();
 
-            if(status>0) printf("The new patient was successfully created with token %d.\n", status); 
-            else printf("Some unexpected error occured.\n");
+            if(status>0) {
+                printf("The new patient was successfully created with token %d.\n", status); 
+            } else {
+                printf("Some unexpected error occured.\n");
+            }
         }
     }
     return 0;       //Keeping the compiler happy

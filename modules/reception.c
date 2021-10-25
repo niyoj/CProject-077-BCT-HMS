@@ -14,16 +14,16 @@ int create_patient() {
 
     printf("\nEnter patient's first name: ");
     scanf(" %s", new_patient.fname);
-    printf("\nEnter patient's middle name: ");
+    printf("Enter patient's middle name: ");
     scanf(" %s", new_patient.mname);
-    printf("\nEnter patient's last name: ");
+    printf("Enter patient's last name: ");
     scanf(" %s", new_patient.lname);
-    printf("\nEnter patient's gender (m/f): ");
+    printf("Enter patient's gender (m/f): ");
     scanf(" %c", &new_patient.gender[0]);
     new_patient.gender[1] = '\0';
-    printf("\nEnter patient's age: ");
+    printf("Enter patient's age: ");
     scanf(" %d", &new_patient.age);
-    printf("\nAssign the patient to the department: ");
+    printf("Assign the patient to the department: ");
     scanf(" %s", new_patient.department);
 
     char cmd[256] = "INSERT ROW;patients;fname,mname,lname,gender,age,department,doctor,status;";
