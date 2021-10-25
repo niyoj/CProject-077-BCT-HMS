@@ -32,7 +32,7 @@ void declare_config(void) {
 void prepare_env(void) {
     if(!table_exists("session")) _db("CREATE TABLE;session;user,time,token,role");
     if(!table_exists("users")) _db("CREATE TABLE;users;fname,lname,nickname,password,role");
-    if(!table_exists("patient")) _db("CREATE TABLE;patients;fname,mname,lname,gender,age,department,doctor,status");
+    if(!table_exists("patient")) _db("CREATE TABLE;patients;token,fname,mname,lname,gender,age,department,doctor,status");
 
     declare_config();           //declaring all the configuration for the app
 
