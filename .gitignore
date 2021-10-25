@@ -1,0 +1,6 @@
+#ignoring execuatable files
+*.out
+*.exe
+
+#ignoring the tables
+.db/tables/
