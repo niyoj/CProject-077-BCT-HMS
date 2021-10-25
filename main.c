@@ -32,6 +32,7 @@
 #include "./modules/config.c"                   //contains necessary configurations for the app
 #include "./modules/authentication.c"           //contains necessary functions related to authentication
 #include "./modules/ui.c"                       //contains necessary functions related to UI
+#include "./modules/analytics.c"                //contains necessary functions related to analytics of the app
 
 int main(void) {
     system("@cls||clear");      //clearing the terminal screen
@@ -71,8 +72,8 @@ int main(void) {
                 printf("\n Some unexpected error occured. Please try again later.\n");
             }
         } else if (i_code == 2) {
-            printf("\nTotal users: 99");
-            printf("\nTotal patients: 100\n\n");
+            printf("\nTotal users: %d", num_users());
+            printf("\nTotal patients: %d\n\n", num_patients());
             //make it dynamic
         } else if (i_code == 3) {
             char user[256] = {};
