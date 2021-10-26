@@ -208,7 +208,7 @@ db get_row(char table[], char cond[], char cond_val[]) {
         char e_row[256][256] = {};
         explode(row, ',', e_row);
 
-        for(int j=0; strlen(e_row[j]) != 0; j++) {
+        for(int j=0; strlen(e_header[j]) != 0; j++) {
             if(strcmp(e_header[j], cond) == 0) {
                 if (strcmp(e_row[j], cond_val) == 0) {
                     strcat(retrn.values, row);
