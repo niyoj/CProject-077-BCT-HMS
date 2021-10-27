@@ -113,6 +113,8 @@ int main(void) {
 
             char cmd[256] = "UPDATE ROW;users;WHERE;nickname;";
             strcat(cmd, _env.logged_user);
+            strcat(cmd, ";AS;password;");
+            strcat(cmd, passwd);
             _db(cmd);
 
             printf("\nThe password was changed successfully\n");
@@ -150,6 +152,8 @@ int main(void) {
             }
 
             show_in_table_patient(num);
+        } else if(i_code == 3) {
+            
         }
         printf("\nPress enter to continue...");
         char c = getchar();

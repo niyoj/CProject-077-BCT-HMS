@@ -187,17 +187,16 @@ void show_in_table_patient(int n) {
         printf(" %s", patient[i].doctor); for(int j=0; j<(max_doctor+5-strlen(patient[i].doctor)); j++) printf(" "); printf("|");
         printf(" %s", patient[i].status); for(int j=0; j<(max_status+5-strlen(patient[i].status)); j++) printf(" "); printf("|");
         printf("\n");   
-
-        printf("+---"); for(int i=0; i<max_token; i++) printf("-"); printf("---+");
-        printf("---"); for(int i=0; i<max_fname; i++) printf("-"); printf("---+");
-        printf("---"); for(int i=0; i<max_mname; i++) printf("-"); printf("---+");
-        printf("---"); for(int i=0; i<max_lname; i++) printf("-"); printf("---+");
-        printf("---"); for(int i=0; i<max_gender; i++) printf("-"); printf("---+");
-        printf("---"); for(int i=0; i<max_age; i++) printf("-"); printf("---+");
-        printf("---"); for(int i=0; i<max_department; i++) printf("-"); printf("---+");
-        printf("---"); for(int i=0; i<max_doctor; i++) printf("-"); printf("---+");
-        printf("---"); for(int i=0; i<max_status; i++) printf("-"); printf("---+");
-        printf("\n");
     }
+
+    printf("+---"); for(int i=0; i<max_token; i++) printf("-"); printf("---+");
+    printf("---"); for(int i=0; i<max_fname; i++) printf("-"); printf("---+");
+    printf("---"); for(int i=0; i<max_mname; i++) printf("-"); printf("---+");
+    printf("---"); for(int i=0; i<max_lname; i++) printf("-"); printf("---+");
+    printf("---"); for(int i=0; i<max_gender; i++) printf("-"); printf("---+");
+    printf("---"); for(int i=0; i<max_age; i++) printf("-"); printf("---+");
+    printf("---"); for(int i=0; i<max_department; i++) printf("-"); printf("---+");
+    printf("---"); for(int i=0; i<max_doctor; i++) printf("-"); printf("---+");
+    printf("---"); for(int i=0; i<max_status; i++) printf("-"); printf("---+");
     printf("\n");
 }
