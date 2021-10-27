@@ -145,15 +145,15 @@ int create_user() {
     printf(".\nPlease note that the passsword of the user must only contain [A to Z],[a to z],[0 to 9]\n\n");
 
     printf("Enter the firstname: ");
-    scanf("%s", fname);                     //getting the first name
+    scanf(" %s", fname);                     //getting the first name
     printf("Enter the lastname: ");
-    scanf("%s", lname);                     //geting the last name
+    scanf(" %s", lname);                     //geting the last name
     printf("Enter the username: ");
-    scanf("%s", username);                  //getting the nick name of the user which most be unique
+    scanf(" %s", username);                  //getting the nick name of the user which most be unique
     printf("Enter the password: ");
-    scanf("%s", passwd);                    //getting the password of the user
+    scanf(" %s", passwd);                    //getting the password of the user
     printf("Enter his/her role: ");
-    scanf("%s", role);                      //getting the admin of the user
+    scanf(" %s", role);                      //getting the admin of the user
 
     char cmd[256] = "GET ROW;users;WHERE;nickname;";
     strcat(cmd, username);

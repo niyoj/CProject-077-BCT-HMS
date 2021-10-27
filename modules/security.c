@@ -6,7 +6,7 @@
 *   Description: This  program file is responsible for encryption, decryption and generating tokens.
 *******************************************************************************************************/
 
-//funcntion hash() is a simple hashing algorithm in C
+//function hash() is a simple hashing algorithm in C
 void hash(unsigned char *str, char retrn[]) {
     unsigned long hash = 5381;
     int c;
