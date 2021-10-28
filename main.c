@@ -144,15 +144,21 @@ int main(void) {
             printf("\nThe new patient was successfully created with token %s.\n", create_patient().token); 
         } else if(i_code == 2) {    
             int num = 0;
-            printf("There are %d entries of patients. How many do you want to see? ", _db("GET ROW;patients;WHERE;status;admitted").rows-1);
-            scanf(" %d", &num);
-
-            while(num<0 || num>_db("GET ROW;patients;WHERE;status;admitted").rows-1) {
-                printf("Please re-enter the number of entries you want to see: ");
+            int rows = _db("GET ROW;patients;WHERE;status;admitted").rows;
+            
+            if(rows<1) {
+                printf("There are no entries of the patients in the database.\n");
+            } else {
+                printf("There are %d entries of patients. How many do you want to see? ", rows-1);
                 scanf(" %d", &num);
-            }
 
-            show_in_table_patient(num);
+                while(num<0 || num>(rows-1)) {
+                    printf("Please re-enter the number of entries you want to see: ");
+                    scanf(" %d", &num);
+                }
+
+                show_in_table_patient(num);
+            }
         } else if(i_code == 3) {
             
         }
