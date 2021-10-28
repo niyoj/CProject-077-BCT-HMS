@@ -24,6 +24,7 @@ The commands and its format to be given for the database modules are as follows;
 
 # For Retriving a Row
 * GET ROW;<TABLE_NAME>;WHERE;<FIELD_NAME>;<VALUE>
+* GET ROW;<TABLE_NAME>;WHERE;<FIELD_NAME>;<VALUE>;AND;<FIELD_NAME>;<VALUE>
 
 */
 #define DB ".db/tables/"    //denotes the path of the .db folder where every tables are stored in csv format
@@ -91,7 +92,35 @@ db _db(char cmd[]) {
         strcpy(retrn.header, e_cmd[2]);
         strcpy(retrn.values, e_cmd[3]);
     } else if(strcmp(e_cmd[0], "GET ROW") == 0) {
-        retrn = get_row(e_cmd[1], e_cmd[3], e_cmd[4]);
+        db temp_retrn = get_row(e_cmd[1], e_cmd[3], e_cmd[4]);      //stores the row temporarily
+
+        //if consists of AND execute more steps
+        if(strcmp("AND", e_cmd[5]) == 0) {
+            //explodint the return from the above part
+            char e_retrn[256][256] = {};
+            explode(temp_retrn.values, ';', e_retrn);
+
+            //preparing to open temp file in write mode
+            char w_src[256] = DB;
+            strcat(w_src, "temp");
+            FILE *temp_fp = fopen(w_src, "w");
+
+            //printing the values obtained from above as form of table
+            fprintf(temp_fp, "%s\n", temp_retrn.header);
+            for(int i=0; strlen(e_retrn[i]) != 0; i++) {
+                fprintf(temp_fp, "%s\n", e_retrn[i]);
+            }
+            fclose(temp_fp);
+            
+            //getting the desired condition from the table temp
+            retrn = get_row("temp", e_cmd[6], e_cmd[7]);
+            
+            //removing the data saved in temp
+            temp_fp = fopen(w_src, "w");
+            fclose(temp_fp);
+        } else {
+            retrn = temp_retrn;     //assigning temp_retrn back to retrn
+        }
     } else if(strcmp(e_cmd[0], "UPDATE ROW") == 0) {
         int status = update_row(e_cmd[1], e_cmd[3], e_cmd[4], e_cmd[6], e_cmd[7]);
         retrn.rows++;
@@ -238,6 +267,7 @@ db get_row(char table[], char cond[], char cond_val[]) {
     explode(header, ',', e_header);
 
     for(int i=0; i<row-1; i++) {
+        if(i == 0) strcpy(retrn.values, "");
         char row[256] = {};
         fscanf(db_get, "%s\n", row);
 
