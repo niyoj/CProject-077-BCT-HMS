@@ -45,15 +45,16 @@ void print_instruction(int level) {
         } else if (strcmp(_env.role, "reception") == 0) {
             printf("[1] => Add a new patient\n");   //done
             printf("[2] => See todays patient\n");  //done
-            printf("[3] => See todays oncall doctors\n");   //done attendance herne jun login garne bitikaai hunxa
-            printf("[4] => Clear the screen\n");    
-            printf("[5] => Change the password\n");
-            printf("[6] => Logout\n\n\n");
+            printf("[3] => See todays oncall doctors\n");   //done
+            printf("[4] => Assign the patient to the doctor\n");
+            printf("[5] => Clear the screen\n");    //done
+            printf("[6] => Change the password\n"); //done
+            printf("[7] => Logout\n\n\n");          //done
 
         }  else if (strcmp(_env.role, "doctor") == 0) {
-            printf("[1] => See my today patients\n");
-            printf("[2] => See my patient record\n");
-            printf("[3] => Diagnosis on patient\n");
+            printf("[1] => See my today patients\n");   //done
+            printf("[2] => See my patient record\n");   //done
+            printf("[3] => Diagnosis on patient\n");    //done
             printf("[4] => Refer for new test\n");
             printf("[5] => See daily chart of a patient\n");
             printf("[6] => See patient labrotary result\n");

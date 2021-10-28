@@ -164,6 +164,36 @@ int main(void) {
         } else if(i_code == 3) {
             printf("Printing the today's on call doctors...\n");
             show_attended("doctor");
+        } else if(i_code == 4) {
+            char cmd[256] = "GET ROW;patients;WHERE;token;";
+            char patient_token[256] = "";
+            char doctor[256] = "";
+
+            printf("Enter the token of the patient: ");;
+            scanf(" %s", patient_token);
+            strcat(cmd, patient_token);
+            
+            if(_db(cmd).code == 0) {
+                printf("! No such patient found.\n");
+            } else {
+                printf("Enter the name of the doctor: ");
+                scanf(" %s", doctor);
+
+                strcpy(cmd, "UPDATE ROW;patients;WHERE;token;");
+                strcat(cmd, patient_token);
+                strcat(cmd, ";AS;doctor;");
+                strcat(cmd, doctor);
+
+                _db(cmd);
+
+                printf("\nThe patient with token %s has been succesfully assigned to %s.\n", patient_token, doctor);
+                
+                char log[256] = "Patient with token ";
+                strcat(log, patient_token);
+                strcat(log, " assigned to doctor ");
+                strcat(log, doctor);
+                add_log(log);
+            }
         }
         printf("\nPress enter to continue...");
         char c = getchar();

@@ -322,11 +322,11 @@ int update_row(char table[], char cond_field[], char cond_val[], char header[], 
         if(strcmp(header, e_real_header[i]) == 0) target = i;
     }
 
-    for(int i=0; strlen(e_val[i]) != 0; i++) {
+    for(int i=0; strlen(e_real_header[i]) != 0; i++) {
         char further_e_val[256][256] = {};
         explode(e_val[i], ',', further_e_val);
 
-        for(int j=0; strlen(further_e_val[j]) != 0; j++) {
+        for(int j=0; strlen(further_e_val[j]) != 0 || strlen(further_e_val[j+1]) != 0; j++) {
             if (j == target) {
                 strcat(append, val);
             } else {
