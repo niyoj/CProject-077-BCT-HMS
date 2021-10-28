@@ -10,8 +10,8 @@
 #include <stdio.h>      //file stdio.h contains necessary function prototypes for printf() and scanf()
 #include <string.h>     //file string.h contains necessary function prototypes for various string related functions
 #include <time.h>       //file time.h contains necessary funciton prototypes for various time related functions
-#include <stdlib.h>
-#include <unistd.h>
+#include <stdlib.h>     //file stdlib.h contains necessary function prototypes for some standard functions
+#include <unistd.h>     //file unistd.h contains function prototype for access()
 
 //if the system is windows then include file Windows.h else include file unistd.h
 #ifdef _WIN32
@@ -76,7 +76,6 @@ int main(void) {
         } else if (i_code == 2) {
             printf("\nTotal users: %d", num_users());
             printf("\nTotal patients: %d\n\n", num_patients());
-            //make it dynamic
         } else if (i_code == 3) {
             char user[256] = {};
             char confirm = 'n';

@@ -18,13 +18,17 @@ struct patient_data create_patient() {
 
     //printing the instrctions for the registration
     printf("\n\nYou are going to register a new patient to be admitted to hospital.\n");
-    printf("Note that you can leave the middle name empty if there is none.\n");
+    printf("Note that if there is no middle name enter NA.\n");
 
     //getting the required information
     printf("\nEnter patient's first name: ");
     scanf(" %s", new_patient.fname);
     printf("Enter patient's middle name: ");
     scanf(" %s", new_patient.mname);
+
+    //replaces the patient middle name with empty character if the middle name is NA (Not Applicable)
+    if(strcmp(new_patient.mname, "na") == 0 || strcmp(new_patient.mname, "NA") == 0) strcpy(new_patient.mname, "");
+
     printf("Enter patient's last name: ");
     scanf(" %s", new_patient.lname);
 
