@@ -26,12 +26,6 @@ The commands and its format to be given for the database modules are as follows;
 * GET ROW;<TABLE_NAME>;WHERE;<FIELD_NAME>;<VALUE>
 
 */
-
-#include <stdio.h>
-#include <string.h>
-
-#include <unistd.h>
-
 #define DB ".db/tables/"    //denotes the path of the .db folder where every tables are stored in csv format
 
 //struct databse_retrn is used to store the return information from the database
@@ -120,22 +114,38 @@ int table_exists(char table[]) {
     char src[256] = DB;
     strcat(src, table);                                   
 
-    //checking if table exists or not
-    if(access(src, F_OK) == 0) {
-        //if table exists then get the number of rows in the table
-        int num = 0;
-        FILE* db_table = fopen(src, "r");
-        char c;
+    //checking if the system is windows or linux
+    if(strcmp(SYS, "LINUX") == 0) {
+        //checking if table exists or not
+        if(access(src, F_OK) == 0) {
+            //if table exists then get the number of rows in the table
+            int num = 0;
+            FILE* db_table = fopen(src, "r");
+            char c;
 
-        while((c = getc(db_table)) != EOF) {
-            if(c == '\n') num++;
+            while((c = getc(db_table)) != EOF) {
+                if(c == '\n') num++;
+            }
+
+            fclose(db_table);
+            return num;     //returning the number of rows in the table
+        } else {
+            if( access( src, F_OK ) != -1) {
+                //if table exists then get the number of rows in the table
+                int num = 0;
+                FILE* db_table = fopen(src, "r");
+                char c;
+
+                while((c = getc(db_table)) != EOF) {
+                    if(c == '\n') num++;
+                }
+
+                fclose(db_table);
+                return num;     //returning the number of rows in the table
+            }
         }
-
-        fclose(db_table);
-        return num;     //returning the number of rows in the table
-    } else {
-        return 0;       //if table doesnot exists returns false
     }
+    return 0;
 }
 
 //function create_table() is used to create a new table in the database

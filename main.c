@@ -11,12 +11,14 @@
 #include <string.h>     //file string.h contains necessary function prototypes for various string related functions
 #include <time.h>       //file time.h contains necessary funciton prototypes for various time related functions
 #include <stdlib.h>
+#include <unistd.h>
 
 //if the system is windows then include file Windows.h else include file unistd.h
 #ifdef _WIN32
 #include <Windows.h>
+#define  SYS "WINDOWS"
 #else
-#include <unistd.h>
+#define SYS "LINUX"
 #endif
 
 //definition section starts here

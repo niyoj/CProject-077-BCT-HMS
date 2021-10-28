@@ -78,7 +78,7 @@ void print_instruction(int level) {
             printf("[5] => Change the password\n");
             printf("[6] => Logout\n");
             
-        } else if(strcmp(_env.role, "pharamcy") == 0) {
+        } else if(strcmp(_env.role, "pharmacy") == 0) {
             printf("[1] => See patient bill\n");
             printf("[2] => Add in the patient bill\n");
             printf("[3] => Get the patient bill\n");
