@@ -162,7 +162,8 @@ int main(void) {
                 show_in_table_patient(num);
             }
         } else if(i_code == 3) {
-            
+            printf("Printing the today's on call doctors...\n");
+            show_attended("doctor");
         }
         printf("\nPress enter to continue...");
         char c = getchar();
