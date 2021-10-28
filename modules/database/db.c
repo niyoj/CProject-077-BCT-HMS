@@ -158,20 +158,20 @@ int table_exists(char table[]) {
 
             fclose(db_table);
             return num;     //returning the number of rows in the table
-        } else {
-            if( access( src, F_OK ) != -1) {
-                //if table exists then get the number of rows in the table
-                int num = 0;
-                FILE* db_table = fopen(src, "r");
-                char c;
+        }
+    } else {
+        if( access( src, F_OK ) != -1) {
+            //if table exists then get the number of rows in the table
+            int num = 0;
+            FILE* db_table = fopen(src, "r");
+            char c;
 
-                while((c = getc(db_table)) != EOF) {
-                    if(c == '\n') num++;
-                }
-
-                fclose(db_table);
-                return num;     //returning the number of rows in the table
+            while((c = getc(db_table)) != EOF) {
+                if(c == '\n') num++;
             }
+
+            fclose(db_table);
+            return num;     //returning the number of rows in the table
         }
     }
     return 0;
