@@ -31,15 +31,18 @@ void declare_config(void) {
 //function prepare_env() is used to prepare the environment for the program
 void prepare_env(void) {
     if(!table_exists("session")) _db("CREATE TABLE;session;user,time,token,role");
-    if(!table_exists("users")) _db("CREATE TABLE;users;fname,lname,nickname,password,role");
+    if(!table_exists("users")) _db("CREATE TABLE;users;fname,lname,username,password,role");
     if(!table_exists("patient")) _db("CREATE TABLE;patients;token,fname,mname,lname,gender,age,department,doctor,status");
 
     declare_config();           //declaring all the configuration for the app
 
+    //if there is no user logged in or if the username is empty in session set is_logged_in to false else true
     if(strcmp(_session.user_name, "") == 0) {
         _env.is_logged_in = 0;
     } else {
         _env.is_logged_in = 1;
+
+        //copies the role of the user to the variable _env.role
         strcpy(_env.logged_user, _session.user_name);
         strcpy(_env.role, _session.role);
     }

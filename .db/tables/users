@@ -1,2 +1,2 @@
-fname,lname,nickname,password,role
+fname,lname,username,password,role
 admin,admin,admin,admin,admin

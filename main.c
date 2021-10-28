@@ -79,10 +79,10 @@ int main(void) {
             char user[256] = {};
             char confirm = 'n';
 
-            printf("\nEnter the user's nickname to delete: ");
+            printf("\nEnter the user's username to delete: ");
             scanf(" %s", user);
 
-            char cmd[256] = "DELETE ROW;users;WHERE;nickname;";
+            char cmd[256] = "DELETE ROW;users;WHERE;username;";
             strcat(cmd, user);
             
             printf("\nAre you sure you want to delete %s? (Y/n): ", user);
@@ -104,14 +104,14 @@ int main(void) {
             char passwd[256] = {};
             
             printf("\nEnter a new password: ");
-            scanf("%s", passwd);
+            scanf(" %s", passwd);
 
             while(strlen(passwd)<6) {
                 printf("\nYour password is too weak.\nEnter a new strong password: ");
-                scanf("%s", passwd);
+                scanf(" %s", passwd);
             }
 
-            char cmd[256] = "UPDATE ROW;users;WHERE;nickname;";
+            char cmd[256] = "UPDATE ROW;users;WHERE;username;";
             strcat(cmd, _env.logged_user);
             strcat(cmd, ";AS;password;");
             strcat(cmd, passwd);

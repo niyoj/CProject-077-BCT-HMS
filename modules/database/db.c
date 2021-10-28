@@ -30,11 +30,11 @@ The commands and its format to be given for the database modules are as follows;
 #include <stdio.h>
 #include <string.h>
 
-
 #include <unistd.h>
 
 #define DB ".db/tables/"    //denotes the path of the .db folder where every tables are stored in csv format
 
+//struct databse_retrn is used to store the return information from the database
 struct database_retrn {
     int rows;               //represents the number of rows affected
     int code;               //represents the return code
@@ -42,8 +42,10 @@ struct database_retrn {
     char values[256];       //represents the values
 };
 
+//declaring new type definition for database
 typedef struct database_retrn db;
 
+//function prototyping starts here
 int table_exists(char[]);
 int create_table(char[], char[]);
 int insert_row(char[], char[], char[]);
@@ -51,6 +53,7 @@ db get_row(char[], char[], char[]);
 int delete_row(char[], char[], char[]);
 int delete_table(char[]);
 int update_row(char[], char[], char[], char[], char[]);
+//function prototyping ends here
 
 //function explode() is used to divide the string into severa chunks from the character specified by separator argument
 int explode(char string[], char separator, char retrn[][256]) {
@@ -68,22 +71,31 @@ int explode(char string[], char separator, char retrn[][256]) {
     }    
 }
 
+//function _db() us the main funciton from where commands are processed and results are returned 
 db _db(char cmd[]) {
-    db retrn;
-    retrn.rows =  0;
+    db retrn;                   //retrn structure is used to store the return values
+    
+    //sanitizing the structure to prevent garabage values
+    retrn.rows =  0;            
+    retrn.code = 0;
     strcpy(retrn.header, "");
     strcpy(retrn.values, "");
 
-    char task[256], table[256] = {}, e_cmd[256][256] = {};
-
+    //declaring important variables needed during the program execution
+    char e_cmd[256][256] = {};
     explode(cmd, ';', e_cmd);
-
+    
+    //processing the command entered by the user
     if(strcmp(e_cmd[0], "CREATE TABLE") == 0) {
         int status = create_table(e_cmd[1], e_cmd[2]);
         retrn.code = status;
+        strcpy(retrn.header, e_cmd[2]);
     } else if(strcmp(e_cmd[0], "INSERT ROW") == 0) {
         int status = insert_row(e_cmd[1], e_cmd[2], e_cmd[3]);
         retrn.code = status;
+        retrn.rows = 1;
+        strcpy(retrn.header, e_cmd[2]);
+        strcpy(retrn.values, e_cmd[3]);
     } else if(strcmp(e_cmd[0], "GET ROW") == 0) {
         retrn = get_row(e_cmd[1], e_cmd[3], e_cmd[4]);
     } else if(strcmp(e_cmd[0], "UPDATE ROW") == 0) {
@@ -102,12 +114,16 @@ db _db(char cmd[]) {
     return retrn; 
 }
 
+//function table_exists() is used to determine wether the table already exists or not
 int table_exists(char table[]) {
+    //preparing the path for the table
     char src[256] = DB;
-    strcat(src, table);                                      
+    strcat(src, table);                                   
 
+    //checking if table exists or not
     if(access(src, F_OK) == 0) {
-        int num=0;
+        //if table exists then get the number of rows in the table
+        int num = 0;
         FILE* db_table = fopen(src, "r");
         char c;
 
@@ -116,55 +132,66 @@ int table_exists(char table[]) {
         }
 
         fclose(db_table);
-        return num;
+        return num;     //returning the number of rows in the table
     } else {
-        return 0;
+        return 0;       //if table doesnot exists returns false
     }
 }
 
+//function create_table() is used to create a new table in the database
 int create_table(char table[], char data[]) {
+    //checking if the table already exists or not
     if(!table_exists(table)) {
+        //preparing the path of the table entered
         char src[256] = DB;
         strcat(src, table);
 
+        //creating a new file with the particular name in the particular path
         FILE* db_create = fopen(src, "w");
         if(db_create == NULL) {
-            return 0;
+            return 0;       //if the file was not created return 0
         } else {
-            fprintf(db_create, "%s\n", data);
+            fprintf(db_create, "%s\n", data);   //if file was created add the header values
             fclose(db_create);
             return 1;
         }
     } else {
-        return 2;    //table does exist already
+        return 2;    //if table does exist already return 2
     }
 }
 
+//function insert_row() is used to insert a row in the  table in the database
 int insert_row(char table[], char header[], char values[]) {
+    //preparing for the path of the table
     char src[256] = DB;
     strcat(src, table);
 
+    //checking if table exists or not
     if(!table_exists(table)) return 0;
 
+    //preparing the variables needed durig the implementation
     char e_header[256][256] = {}, e_values[256][256] = {};
     explode(header, ',', e_header);
     explode(values, ',', e_values);
 
-    char r_header[256] = {};
+    char r_header[256] = {};        //stores the original header of the table
     
     FILE* db_row;
     db_row = fopen(src, "r");
-    fscanf(db_row, "%s\n", r_header);
+    fscanf(db_row, "%s\n", r_header);       //getting the header of the table
     fclose(db_row);
 
+    //exploding the real header on the basis of comma
     char er_header[256][256] = {};
     explode(r_header, ',', er_header);
 
-    char toadd[256] = {};
+    char toadd[256] = {};   //stores the string to be appended at last
 
+    //comparison occurs here and string to be stored in database is generated and stored in toadd from here
     for(int i=0; strlen(er_header[i]) != 0; i++) {
-        int got = 0;
+        int got = 0;        //indicates whether or not the field is passed
         for(int j=0; strlen(e_header[j]) != 0; j++) {
+            //checks if the real header and header passed matches or not for each column
             if(strcmp(er_header[i], e_header[j]) == 0) {
                 strcat(toadd, e_values[j]);
                 strcat(toadd, ",");
@@ -173,19 +200,18 @@ int insert_row(char table[], char header[], char values[]) {
             }
         }
 
-        if(got == 0) {
-            strcat(toadd, ",");
-        }
+        if(got == 0) strcat(toadd, ",");
     }
-    toadd[strlen(toadd)-1] = '\0';
+    toadd[strlen(toadd)-1] = '\0';      //removing extra comma
 
-    db_row = fopen(src, "a");
+    db_row = fopen(src, "a");           //appending the string
     fprintf(db_row, "%s\n", toadd);
 
     fclose(db_row);
     return 1;
 }
 
+//function get_row() is used to get the row where desired condition is met
 db get_row(char table[], char cond[], char cond_val[]) {
     char src[256] = DB;
     strcat(src, table);
@@ -208,7 +234,7 @@ db get_row(char table[], char cond[], char cond_val[]) {
         char e_row[256][256] = {};
         explode(row, ',', e_row);
 
-        for(int j=0; strlen(e_header[j]) != 0; j++) {
+        for(int j=0; strlen(e_row[j]) != 0; j++) {
             if(strcmp(e_header[j], cond) == 0) {
                 if (strcmp(e_row[j], cond_val) == 0) {
                     strcat(retrn.values, row);

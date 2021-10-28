@@ -9,7 +9,7 @@
 struct Users_data {
     char fname[256];
     char lname[256];
-    char nickname[256];
+    char username[256];
     char passwd[256];
     char role[256];
 };
@@ -19,10 +19,10 @@ struct Users_data users[10000];
 //function print_logo() is used to print the logo of the program which is customizable by editing file ./modules/config.c
 void print_logo(void) {
     printf("\n");
-    terminal_print(_config.app_name);
+    terminal_print(_config.app_name);       //using module terminal_print for printing purpose
 
     printf("\n");
-    for(int i=0; i<(strlen(_config.app_name)*14); i++) printf("=");
+    for(int i=0; i<(strlen(_config.app_name)*14); i++) printf("=");     //printing the horizontal bar
     printf("\n\n\n");
 }
 
@@ -109,7 +109,7 @@ int start_login() {
         scanf(" %s", passwd);
 
         int is_true = authenticate(user_name, passwd);      //validating the credentials
-        
+
         //if credentials are true create a session else repeat
         if(is_true) {
             char role[256] = {};
@@ -155,7 +155,7 @@ int create_user() {
     printf("Enter his/her role: ");
     scanf(" %s", role);                      //getting the admin of the user
 
-    char cmd[256] = "GET ROW;users;WHERE;nickname;";
+    char cmd[256] = "GET ROW;users;WHERE;username;";
     strcat(cmd, username);
  
 
@@ -164,7 +164,7 @@ int create_user() {
         printf("Please enter new username: ");
         scanf(" %s", username);
         
-        strcpy(cmd, "GET ROW;users;WHERE;nickname;");
+        strcpy(cmd, "GET ROW;users;WHERE;username;");
         strcat(cmd, username);
     }
 
@@ -174,7 +174,7 @@ int create_user() {
         scanf(" %s", passwd);
     }
 
-    strcpy(cmd, "INSERT ROW;users;fname,lname,nickname,password,role;");
+    strcpy(cmd, "INSERT ROW;users;fname,lname,username,password,role;");
     strcat(cmd, fname);
     strcat(cmd, ",");
     strcat(cmd, lname);
@@ -216,7 +216,7 @@ void show_in_tables(char table[], int n) {
             } else {
                 if(index == 0) users[i].fname[strlen(users[i].fname)] = row[j]; 
                 if(index == 1) users[i].lname[strlen(users[i].lname)] = row[j]; 
-                if(index == 2) users[i].nickname[strlen(users[i].nickname)] = row[j]; 
+                if(index == 2) users[i].username[strlen(users[i].username)] = row[j]; 
                 if(index == 3) users[i].passwd[strlen(users[i].passwd)] = row[j];
                 if(index == 4) users[i].role[strlen(users[i].role)] = row[j];
             }
@@ -225,14 +225,14 @@ void show_in_tables(char table[], int n) {
 
     int max_fname = 9;
     int max_lname = 9;
-    int max_nickname = 9;
+    int max_username = 9;
     int max_passwd = 8;
     int max_role = 4;
 
     for(int i=0; i<n; i++) {
         if(strlen(users[i].fname)>max_fname) max_fname = strlen(users[i].fname);
         if(strlen(users[i].lname)>max_lname) max_lname = strlen(users[i].lname);
-        if(strlen(users[i].nickname)>max_nickname) max_nickname = strlen(users[i].nickname);
+        if(strlen(users[i].username)>max_username) max_username = strlen(users[i].username);
         if(strlen(users[i].passwd)>max_passwd) max_passwd = strlen(users[i].passwd);
         if(strlen(users[i].role)>max_role) max_role = strlen(users[i].role);
     }
@@ -241,7 +241,7 @@ void show_in_tables(char table[], int n) {
     
     printf("+---"); for(int i=0; i<max_fname; i++) printf("-"); printf("---+");
     printf("---"); for(int i=0; i<max_lname; i++) printf("-"); printf("---+");
-    printf("---"); for(int i=0; i<max_nickname; i++) printf("-"); printf("---+");
+    printf("---"); for(int i=0; i<max_username; i++) printf("-"); printf("---+");
     printf("---"); for(int i=0; i<max_passwd; i++) printf("-"); printf("---+");
     printf("---"); for(int i=0; i<max_role; i++) printf("-"); printf("---+");
 
@@ -249,14 +249,14 @@ void show_in_tables(char table[], int n) {
 
     printf("|   FIRSTNAME"); for(int i=0; i<(max_fname-9); i++) printf(" "); printf("   ");
     printf("|   LASTNAME"); for(int i=0; i<(max_lname-9); i++) printf(" "); printf("    ");
-    printf("|   NICKNAME"); for(int i=0; i<(max_nickname-9); i++) printf(" "); printf("    ");
+    printf("|   NICKNAME"); for(int i=0; i<(max_username-9); i++) printf(" "); printf("    ");
     printf("|   PASSWORD"); for(int i=0; i<(max_passwd-8); i++) printf(" "); printf("   ");
     printf("|   ROLE"); for(int i=0; i<(max_role-4); i++) printf(" "); printf("   |");
     printf("\n");
         
     printf("+---"); for(int i=0; i<max_fname; i++) printf("-"); printf("---+");
     printf("---"); for(int i=0; i<max_lname; i++) printf("-"); printf("---+");
-    printf("---"); for(int i=0; i<max_nickname; i++) printf("-"); printf("---+");
+    printf("---"); for(int i=0; i<max_username; i++) printf("-"); printf("---+");
     printf("---"); for(int i=0; i<max_passwd; i++) printf("-"); printf("---+");
     printf("---"); for(int i=0; i<max_role; i++) printf("-"); printf("---+");
     
@@ -265,14 +265,14 @@ void show_in_tables(char table[], int n) {
     for(int i=0; i<n; i++) {
         printf("| %s", users[i].fname); for(int j=0; j<(max_fname+5-strlen(users[i].fname)); j++) printf(" "); printf("|");
         printf(" %s", users[i].lname); for(int j=0; j<(max_lname+5-strlen(users[i].lname)); j++) printf(" "); printf("|");
-        printf(" %s", users[i].nickname); for(int j=0; j<(max_nickname+5-strlen(users[i].nickname)); j++) printf(" "); printf("|");
+        printf(" %s", users[i].username); for(int j=0; j<(max_username+5-strlen(users[i].username)); j++) printf(" "); printf("|");
         printf(" %s", users[i].passwd); for(int j=0; j<(max_passwd+5-strlen(users[i].passwd)); j++) printf(" "); printf("|");
         printf(" %s", users[i].role); for(int j=0; j<(max_role+5-strlen(users[i].role)); j++) printf(" "); printf("|");
         printf("\n");   
     }  
     printf("+---"); for(int i=0; i<max_fname; i++) printf("-"); printf("---+");
     printf("---"); for(int i=0; i<max_lname; i++) printf("-"); printf("---+");
-    printf("---"); for(int i=0; i<max_nickname; i++) printf("-"); printf("---+");
+    printf("---"); for(int i=0; i<max_username; i++) printf("-"); printf("---+");
     printf("---"); for(int i=0; i<max_passwd; i++) printf("-"); printf("---+");
     printf("---"); for(int i=0; i<max_role; i++) printf("-"); printf("---+"); printf("\n");
 }
