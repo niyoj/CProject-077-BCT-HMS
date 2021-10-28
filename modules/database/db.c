@@ -254,7 +254,14 @@ int insert_row(char table[], char header[], char values[]) {
 db get_row(char table[], char cond[], char cond_val[]) {
     char src[256] = DB;
     strcat(src, table);
-    db retrn;
+    db retrn;    
+    
+    //sanitizing the structure to prevent garabage values
+    retrn.rows =  0;            
+    retrn.code = 0;
+    strcpy(retrn.header, "");
+    strcpy(retrn.values, "");
+    
     int found = 0;
 
     if(!table_exists(table)){ retrn.code = 0; return retrn; }
@@ -267,7 +274,6 @@ db get_row(char table[], char cond[], char cond_val[]) {
     explode(header, ',', e_header);
 
     for(int i=0; i<row-1; i++) {
-        if(i == 0) strcpy(retrn.values, "");
         char row[256] = {};
         fscanf(db_get, "%s\n", row);
 
