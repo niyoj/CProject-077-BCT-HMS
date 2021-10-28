@@ -30,10 +30,11 @@
 #include "./modules/rbacs.c"                    //contains necessary functions related to RBACS mdodule
 #include "./modules/security.c"                 //contains necessary functions related to hashing and encryption in the program
 #include "./modules/sessions.c"                 //contains necessary functions related to session in the program
-#include "./modules/reception.c"                 //contains necessary functions related to session in the program
+#include "./modules/reception.c"                //contains necessary functions related to session in the program
 #include "./modules/config.c"                   //contains necessary configurations for the app
 #include "./modules/authentication.c"           //contains necessary functions related to authentication
 #include "./modules/ui.c"                       //contains necessary functions related to UI
+#include "./modules/attendance.c"               //contains necessary functions related to attendance
 #include "./modules/analytics.c"                //contains necessary functions related to analytics of the app
 
 int main(void) {
@@ -49,6 +50,7 @@ int main(void) {
         if(!status) return 0;                //if login failed exit the program
     }
 
+    attend_today();                         //does the attendance for today
     starting_phase:                         //label starting_phase denotes the point from where the actual program begins
 
     system("@cls||clear");      //clearing the terminal screen
