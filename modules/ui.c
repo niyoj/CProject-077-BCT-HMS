@@ -14,7 +14,7 @@ struct Users_data {
     char role[256];
 };
 
-struct Users_data users[10000];
+struct Users_data users[1000];
 
 //function print_logo() is used to print the logo of the program which is customizable by editing file ./modules/config.c
 void print_logo(void) {
@@ -46,7 +46,7 @@ void print_instruction(int level) {
             printf("[1] => Add a new patient\n");   //done
             printf("[2] => See todays patient\n");  //done
             printf("[3] => See todays oncall doctors\n");   //done
-            printf("[4] => Assign the patient to the doctor\n");
+            printf("[4] => Assign the patient to the doctor\n");    //done
             printf("[5] => Clear the screen\n");    //done
             printf("[6] => Change the password\n"); //done
             printf("[7] => Logout\n\n\n");          //done
@@ -201,25 +201,28 @@ int create_user() {
     }
 }
 
-void show_in_tables(char table[], int n) {
+void show_in_tables(int n) {
     char row[256] = {};
     FILE *table_fp = fopen("./.db/tables/users", "r");
     fscanf(table_fp, "%s\n", row);
     strcpy(row, "");
 
     for(int i=0; i<n; i++) {
-        char retrn = fscanf(table_fp, "%s\n", row);
+        fscanf(table_fp, "%s\n", row);
 
         int index = 0;
-        for(int j=0; j<strlen(row); j++) {
+        int len = 0;
+        for(int j=0; row[j] != 0; j++) {
             if(row[j] == ',') {
-                index++;
+                index++; 
+                len = 0;
             } else {
-                if(index == 0) users[i].fname[strlen(users[i].fname)] = row[j]; 
-                if(index == 1) users[i].lname[strlen(users[i].lname)] = row[j]; 
-                if(index == 2) users[i].username[strlen(users[i].username)] = row[j]; 
-                if(index == 3) users[i].passwd[strlen(users[i].passwd)] = row[j];
-                if(index == 4) users[i].role[strlen(users[i].role)] = row[j];
+                if(index == 0) users[i].fname[len] = row[j]; 
+                if(index == 1) users[i].lname[len] = row[j]; 
+                if(index == 2) users[i].username[len] = row[j]; 
+                if(index == 3) users[i].passwd[len] = row[j];
+                if(index == 4) users[i].role[len] = row[j];
+                len++;
             }
         }
     }

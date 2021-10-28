@@ -131,7 +131,7 @@ int main(void) {
                 printf("\nPlease re-enter the number of entries you want to see: ");
                 scanf(" %d", &num);
             }
-            show_in_tables("users", num);
+            show_in_tables(num);
         } else if (i_code == 7) {
             add_log("Logout command from the user");
             return 0;

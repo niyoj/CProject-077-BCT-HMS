@@ -105,19 +105,22 @@ void show_in_table_patient(int n) {
         char retrn = fscanf(table_fp, "%s\n", row);
 
         int index = 0;
+        int len =  0;
         for(int j=0; j<strlen(row); j++) {
             if(row[j] == ',') {
                 index++;
+                len = 0;
             } else {
-                if(index == 0) patient[i].token[strlen(patient[i].token)] = row[j]; 
-                if(index == 1) patient[i].fname[strlen(patient[i].fname)] = row[j]; 
-                if(index == 2) patient[i].mname[strlen(patient[i].mname)] = row[j]; 
-                if(index == 3) patient[i].lname[strlen(patient[i].lname)] = row[j]; 
-                if(index == 4) patient[i].gender[strlen(patient[i].gender)] = row[j];
-                if(index == 5) patient[i].age[strlen(patient[i].age)] = row[j];
-                if(index == 6) patient[i].department[strlen(patient[i].department)] = row[j];
-                if(index == 7) patient[i].doctor[strlen(patient[i].doctor)] = row[j];
-                if(index == 8) patient[i].status[strlen(patient[i].status)] = row[j];
+                if(index == 0) patient[i].token[len] = row[j]; 
+                if(index == 1) patient[i].fname[len] = row[j]; 
+                if(index == 2) patient[i].mname[len] = row[j]; 
+                if(index == 3) patient[i].lname[len] = row[j]; 
+                if(index == 4) patient[i].gender[len] = row[j];
+                if(index == 5) patient[i].age[len] = row[j];
+                if(index == 6) patient[i].department[len] = row[j];
+                if(index == 7) patient[i].doctor[len] = row[j];
+                if(index == 8) patient[i].status[len] = row[j];
+                len++;
             }
         }
     }
