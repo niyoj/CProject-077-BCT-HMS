@@ -23,6 +23,7 @@ void hash(unsigned char *str, char retrn[]) {
 
 //function create_token() is used to generate a random number in form of integer
 void create_token(char retrn[]) {
+    srand(time(0));
     int max = 1, min = 0;
     int l = 6;
     while(l > 0){
