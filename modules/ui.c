@@ -54,15 +54,16 @@ void print_instruction(int level) {
             printf("[8] => Logout\n\n\n");          //done
 
         }  else if (strcmp(_env.role, "doctor") == 0) {
-            printf("[1] => See my today patients\n");   //done
-            printf("[2] => See my patient record\n");   //done
-            printf("[3] => Diagnosis on patient\n");    //done
-            printf("[4] => Refer for new test\n");
-            printf("[5] => See daily chart of a patient\n");
-            printf("[6] => See patient labrotary result\n");
-            printf("[7] => Discharge a patient\n");
-            printf("[8] => Change the password\n");
-            printf("[9] => Logout\n\n\n");
+            printf("[1]  => See my today patients\n");   //done
+            printf("[2]  => See my patient record\n");   //done
+            printf("[3]  => Diagnosis on patient\n");    //done
+            printf("[4]  => Refer for new test\n");
+            printf("[5]  => See daily chart of a patient\n");
+            printf("[6]  => See patient labrotary result\n");
+            printf("[7]  => Discharge a patient\n");
+            printf("[8]  => End the day for your job\n");
+            printf("[9]  => Change the password\n");
+            printf("[10] => Logout\n\n\n");
 
         } else if(strcmp(_env.role, "nurse") == 0) {
             printf("[1] => See my patient today\n");
@@ -84,10 +85,9 @@ void print_instruction(int level) {
         } else if(strcmp(_env.role, "pharmacy") == 0) {
             printf("[1] => See patient bill\n");
             printf("[2] => Add in the patient bill\n");
-            printf("[3] => Get the patient bill\n");
-            printf("[4] => Clear the screen\n");
-            printf("[5] => Change the password\n");
-            printf("[6] => Logout\n");
+            printf("[3] => Clear the screen\n");
+            printf("[4] => Change the password\n");
+            printf("[5] => Logout\n");
             
         }
     } else if(level == 2) {

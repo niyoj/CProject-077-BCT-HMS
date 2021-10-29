@@ -23,9 +23,7 @@ int create_session(char user[], char role[]) {
     } else {
         strcpy(_session.user_name, user);
 
-        time_t t;
-        t=time(NULL);
-        strftime(_session.logged_time, sizeof(_session.logged_time), "%x %X", localtime(&t));
+        get_time(_session.logged_time);
 
         char tohash[256] = {};
         strcpy(tohash, _session.user_name);

@@ -1,8 +1,6 @@
 void attend_today() {
     char date[15] = {};
-    time_t t;
-    t=time(NULL);
-    strftime(date, sizeof(date), "%x", localtime(&t));
+    get_date(date);
 
     char cmd[256] = "GET ROW;attendance;WHERE;username;";
     strcat(cmd, _env.logged_user);
@@ -23,9 +21,7 @@ void attend_today() {
 
 void day_end() {
     char date[15] = {};
-    time_t t;
-    t=time(NULL);
-    strftime(date, sizeof(date), "%x", localtime(&t));
+    get_date(date);
 
     char cmd[256] = "GET ROW;leave;WHERE;username;";
     strcat(cmd, _env.logged_user);
@@ -48,9 +44,7 @@ void day_end() {
 }
 void show_attended(char role[]) {
     char date[15] = {};
-    time_t t;
-    t=time(NULL);
-    strftime(date, sizeof(date), "%x", localtime(&t));
+    get_date(date);
 
     char cmd[256] = "GET ROW;attendance;WHERE;role;";
     strcat(cmd, role);

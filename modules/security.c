@@ -20,3 +20,17 @@ void hash(unsigned char *str, char retrn[]) {
         hash = hash/10; 
     }
 }
+
+//function create_token() is used to generate a random number in form of integer
+void create_token(char retrn[]) {
+    int max = 1, min = 0;
+    int l = 6;
+    while(l > 0){
+        max *= 10;
+        l--;
+    }
+    min = max/10;
+    int generated = min + rand() % (max - min);
+    
+    sprintf(retrn, "%d", generated);
+}

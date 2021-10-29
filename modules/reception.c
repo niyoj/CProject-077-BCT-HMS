@@ -11,9 +11,8 @@ struct patient_data {
 };
 struct patient_data patient[1000];
 
-
 //function create_patient() is used to register a new patient
-struct patient_data create_patient() {
+struct patient_data register_patient() {
     struct patient_data new_patient;     //stores the information of new patient
 
     //printing the instrctions for the registration
@@ -50,10 +49,7 @@ struct patient_data create_patient() {
 
     //generating a token
     char token[100] = {};       //stores the token temporarily
-    strcat(token, new_patient.fname);
-    strcat(token, new_patient.mname);
-    strcat(token, new_patient.lname);
-    hash(new_patient.token, token);         //generating token from hashing algorithm
+    create_token(token);
     strcpy(new_patient.token, token);       //copying the generated token to structure
 
     //preparing the command to add the entry in database
@@ -91,6 +87,13 @@ struct patient_data create_patient() {
     char log[256] = "Added new patient with token ";
     strcat(log, new_patient.token);
     add_log(log);
+
+    //creating necessary tables in database
+    create_patient(token, "diagnosis");
+    create_patient(token, "lab");
+    create_patient(token, "health");
+    create_patient(token, "medication");
+    create_patient(token, "pharma");
     
     return new_patient;
 }

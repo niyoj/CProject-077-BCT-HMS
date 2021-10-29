@@ -27,7 +27,7 @@ The commands and its format to be given for the database modules are as follows;
 * GET ROW;<TABLE_NAME>;WHERE;<FIELD_NAME>;<VALUE>;AND;<FIELD_NAME>;<VALUE>
 
 */
-#define DB ".db/tables/"    //denotes the path of the .db folder where every tables are stored in csv format
+#define DB "./.db/tables/"    //denotes the path of the .db folder where every tables are stored in csv format
 
 //struct databse_retrn is used to store the return information from the database
 struct database_retrn {
@@ -326,7 +326,7 @@ int update_row(char table[], char cond_field[], char cond_val[], char header[], 
         char further_e_val[256][256] = {};
         explode(e_val[i], ',', further_e_val);
 
-        for(int j=0; strlen(further_e_val[j]) != 0 || strlen(further_e_val[j+1]) != 0; j++) {
+        for(int j=0; strlen(further_e_val[j]) != 0 || strlen(further_e_val[j+1]) != 0 || strlen(further_e_val[j+2]) != 0; j++) {
             if (j == target) {
                 strcat(append, val);
             } else {

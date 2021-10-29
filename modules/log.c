@@ -3,10 +3,8 @@ void start_logging() {
     FILE* flog;
 
     //getting the date and time in string format
-    time_t t;
-    t=time(NULL);
     char start_time[256] = {};
-    strftime(start_time, sizeof(start_time), "%x %X", localtime(&t));
+    get_time(start_time);
 
     flog = fopen(LOGS, "a");        //oppening the logs file in append mode
 
