@@ -38,11 +38,8 @@ struct patient_data register_patient() {
     scanf(" %c", &new_patient.gender[0]);
     new_patient.gender[1] = '\0';
     
-    //getting age as a integer and it converts into string in further steps
-    int age;
     printf("Enter patient's age: ");
-    scanf(" %d", &age);
-
+    scanf(" %s", new_patient.age);
 
     printf("Assign the patient to the department: ");
     scanf(" %s", new_patient.department);
@@ -64,19 +61,8 @@ struct patient_data register_patient() {
     strcat(cmd, ",");
     strcat(cmd, new_patient.gender);
     strcat(cmd, ",");
-
-    //converting age to string
-    int len = 1;
-    if(age/100 > 1) len=3; else if(age/10 > 1) len = 2;
-
-    for(int i=0; i<len; i++) {
-        new_patient.age[len-1-i] = age%10+48;
-        age = age/10;
-    }
-    new_patient.age[len] = '\0';
     strcat(cmd, new_patient.age);
-    strcat(cmd, ",");
-    
+    strcat(cmd, ",");    
     strcat(cmd, new_patient.department);
     strcat(cmd, ",");
     strcat(cmd, ",admitted");
