@@ -121,6 +121,10 @@ void new_diagnosis(char token[]) {
   strcat(cmd, date);
   
   _db(cmd);
+  
+  char log[256] = "New diagnosis was added for patient with token ";
+  strcat(log, token);
+  add_log(log);
 }
 
 void see_diagnosis(char token[]) {
@@ -242,6 +246,9 @@ void create_lab(char token[]) {
   strcat(cmd, "ordered");
   
   _db(cmd);   
+  char log[256] = "New lab report was reffered for patient with token ";
+  strcat(log, token);
+  add_log(log);
 }
 
 void update_lab(char token[]) {
@@ -348,6 +355,12 @@ void update_lab(char token[]) {
   strcat(cmd, ";AS;value;");
   strcat(cmd, result);
   _db(cmd);
+
+  char log[256] = "Lab report with token ";
+  strcat(log, lab_token); 
+  strcat(log, " was update for patient with token ");
+  strcat(log, token);
+  add_log(log);
 }
 
 void see_lab(char token[]) {
@@ -507,7 +520,11 @@ void update_health(char token[]) {
   strcat(cmd, ",");
   strcat(cmd, temp);
   
-  _db(cmd);  
+  _db(cmd); 
+  
+  char log[256] = "Health chart was updated for patient with token ";
+  strcat(log, token);
+  add_log(log); 
 }
 
 void see_health(char token[]) {
@@ -655,7 +672,11 @@ void update_medication(char token[]) {
   strcat(cmd, ",");
   strcat(cmd, end);
   
-  _db(cmd);   
+  _db(cmd);  
+  
+  char log[256] = "New medication was added for patient with token ";
+  strcat(log, token);
+  add_log(log); 
 }
 
 void see_medication(char token[]) {
@@ -808,6 +829,11 @@ void update_pharma_bill(char token[]) {
     if (c == 'y') repeat = 1; else repeat = 0;
     printf("\n");
   } while (repeat == 1);
+
+
+  char log[256] = "New pharmacy bill was added for patient with token ";
+  strcat(log, token);
+  add_log(log);
 }
 
 void see_pharma_bill(char token[]) {
