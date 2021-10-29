@@ -202,6 +202,38 @@ int main(void) {
                 strcat(log, doctor);
                 add_log(log);
             }
+        } else if(i_code == 5) {
+            goto starting_phase;
+        } else if(i_code == 6) {
+            char passwd[256] = {};
+            
+            printf("\nEnter a new password: ");
+            scanf(" %s", passwd);
+
+            while(strlen(passwd)<6) {
+                printf("\nYour password is too weak.\nEnter a new strong password: ");
+                scanf(" %s", passwd);
+            }
+
+            char cmd[256] = "UPDATE ROW;users;WHERE;username;";
+            strcat(cmd, _env.logged_user);
+            strcat(cmd, ";AS;password;");
+            strcat(cmd, passwd);
+            _db(cmd);
+
+            printf("\nThe password was changed successfully\n");
+            add_log("Password was changed successfully");
+        } else if(i_code == 7) {
+            printf("Are you sure you want to end your today's work day? (Y/n) ");
+            char ans = 'n';
+            scanf(" %c", &ans);
+
+            if(ans == 'Y') {
+                day_end();
+            }
+        } else if(i_code == 8) {
+            add_log("Logout command from the user");
+            return 0;
         }
         printf("\nPress enter to continue...");
         char c = getchar();

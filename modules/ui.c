@@ -50,7 +50,8 @@ void print_instruction(int level) {
             printf("[4] => Assign the patient to the doctor\n");    //done
             printf("[5] => Clear the screen\n");    //done
             printf("[6] => Change the password\n"); //done
-            printf("[7] => Logout\n\n\n");          //done
+            printf("[7] => End the day for your job\n");     //done
+            printf("[8] => Logout\n\n\n");          //done
 
         }  else if (strcmp(_env.role, "doctor") == 0) {
             printf("[1] => See my today patients\n");   //done
