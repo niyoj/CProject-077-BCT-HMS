@@ -97,7 +97,33 @@ struct patient_data create_patient() {
 
 void show_in_table_patient(int n) {
     char row[256] = {};
-    FILE *table_fp = fopen("./.db/tables/patients", "r");
+    FILE* table_fp;
+    
+    if(strcmp(_env.role, "doctor") == 0) {
+        char t_cmd[256] = "GET ROW;patients;WHERE;doctor;";
+        strcat(t_cmd, _env.logged_user);
+        strcat(t_cmd, ";AND;status;admitted");
+        char values[256] = {};
+        strcpy(values, _db(t_cmd).values);
+        char header[256] = {};
+        
+        strcpy(header, _db(t_cmd).header);
+
+        char t_e_val[256][256] = {};
+        explode(values, ';', t_e_val);
+
+        table_fp = fopen("./.db/tables/temp", "w");
+        fprintf(table_fp, "%s\n", header);
+        for(int i=0; strlen(t_e_val[i]) != 0; i++) {
+            fprintf(table_fp, "%s\n", t_e_val[i]);
+            n++;
+        }
+        fclose(table_fp);
+
+        table_fp = fopen("./.db/tables/temp", "r");     
+    } else {
+        table_fp = fopen("./.db/tables/patients", "r");
+    }
     fscanf(table_fp, "%s\n", row);
     strcpy(row, "");
 

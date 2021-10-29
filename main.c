@@ -30,8 +30,8 @@
 #include "./modules/rbacs.c"                    //contains necessary functions related to RBACS mdodule
 #include "./modules/security.c"                 //contains necessary functions related to hashing and encryption in the program
 #include "./modules/sessions.c"                 //contains necessary functions related to session in the program
-#include "./modules/reception.c"                //contains necessary functions related to session in the program
 #include "./modules/config.c"                   //contains necessary configurations for the app
+#include "./modules/reception.c"                //contains necessary functions related to session in the program
 #include "./modules/authentication.c"           //contains necessary functions related to authentication
 #include "./modules/ui.c"                       //contains necessary functions related to UI
 #include "./modules/attendance.c"               //contains necessary functions related to attendance
@@ -234,6 +234,14 @@ int main(void) {
         } else if(i_code == 8) {
             add_log("Logout command from the user");
             return 0;
+        }
+        printf("\nPress enter to continue...");
+        char c = getchar();
+        c = getchar();
+        goto instruction_phase;
+    } else if(strcmp(_env.role, "doctor") == 0) {
+        if(i_code == 1) {
+            show_in_table_patient(0);
         }
         printf("\nPress enter to continue...");
         char c = getchar();
