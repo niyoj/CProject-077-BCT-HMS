@@ -82,15 +82,17 @@ void print_instruction(int level) {
             printf("[2] => Update lab result\n");
             printf("[3] => See lab result of the patient\n");
             printf("[4] => Clear the screen\n");
-            printf("[5] => Change the password\n");
-            printf("[6] => Logout\n\n\n");
+            printf("[5] => End the day for me today\n");
+            printf("[6] => Change the password\n");
+            printf("[7] => Logout\n\n\n");
             
         } else if(strcmp(_env.role, "pharmacy") == 0) {
             printf("[1] => See patient bill\n");
             printf("[2] => Add in the patient bill\n");
             printf("[3] => Clear the screen\n");
-            printf("[4] => Change the password\n");
-            printf("[5] => Logout\n\n\n");
+            printf("[4] => End the day for me today\n");
+            printf("[5] => Change the password\n");
+            printf("[6] => Logout\n\n\n");
             
         }
     } else if(level == 2) {
