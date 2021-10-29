@@ -123,6 +123,14 @@ int main(void) {
             printf("\nThe password was changed successfully\n");
             add_log("Password was changed successfully");
         } else if (i_code == 6) {
+            printf("Are you sure you want to end your today's work day? (Y/n) ");
+            char ans = 'n';
+            scanf(" %c", &ans);
+
+            if(ans == 'Y') {
+                day_end();
+            }
+        } else if (i_code == 7) {
             int num = 1;
             printf("The table contains %d number of entries. How many do you prefer to see? ", table_exists("users")-1);
             scanf(" %d", &num);
@@ -132,7 +140,7 @@ int main(void) {
                 scanf(" %d", &num);
             }
             show_in_tables(num);
-        } else if (i_code == 7) {
+        } else if (i_code == 8) {
             add_log("Logout command from the user");
             return 0;
         }

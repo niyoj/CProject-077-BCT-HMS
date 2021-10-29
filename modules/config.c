@@ -34,6 +34,7 @@ void prepare_env(void) {
     if(!table_exists("users")) _db("CREATE TABLE;users;fname,lname,username,password,role");
     if(!table_exists("patient")) _db("CREATE TABLE;patients;token,fname,mname,lname,gender,age,department,doctor,status");
     if(!table_exists("attendance")) _db("CREATE TABLE;attendance;username,role,date");
+    if(!table_exists("leave")) _db("CREATE TABLE;attendance;username,role,date");
 
     declare_config();           //declaring all the configuration for the app
 

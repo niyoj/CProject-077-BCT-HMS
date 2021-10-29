@@ -39,8 +39,9 @@ void print_instruction(int level) {
             printf("[3] => Delete a user\n");       //done
             printf("[4] => Clear the screen\n");    //done
             printf("[5] => Change password\n");     //done
-            printf("[6] => See all the user details\n");    //done
-            printf("[7] => Logout\n\n\n");          //done
+            printf("[6] => End the day for your job\n");     //done
+            printf("[7] => See all the user details\n");    //done
+            printf("[8] => Logout\n\n\n");          //done
 
         } else if (strcmp(_env.role, "reception") == 0) {
             printf("[1] => Add a new patient\n");   //done

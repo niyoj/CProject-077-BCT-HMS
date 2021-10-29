@@ -254,7 +254,7 @@ int insert_row(char table[], char header[], char values[]) {
 db get_row(char table[], char cond[], char cond_val[]) {
     char src[256] = DB;
     strcat(src, table);
-    db retrn;    
+    db retrn;
     
     //sanitizing the structure to prevent garabage values
     retrn.rows =  0;            
