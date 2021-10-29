@@ -290,7 +290,25 @@ int main(void) {
             }
 
             new_diagnosis(token);
-        } else if(i_code == 4) {//refer to a new test
+        } else if(i_code == 4) {//add medication
+            char token[256] = {};
+            printf("Enter the token number of the patient: ");
+            scanf(" %s", token);
+
+            char cmd[256] = "GET ROW;patients;WHERE;token;";
+            strcat(cmd, token);
+
+            while(_db(cmd).code == 0) {
+                strcpy(token, "");
+                printf("Token not found!!\nPlease re-enter the token number of the patient: ");
+                scanf(" %s", token);
+
+                strcpy(cmd, "GET ROW;patients;WHERE;token;");
+                strcat(cmd, token);
+            }
+
+            update_medication(token);
+        } else if(i_code == 5) {//refer to a new test
             char token[256] = {};
             printf("Enter the token number of the patient: ");
             scanf(" %s", token);
@@ -308,7 +326,7 @@ int main(void) {
             }
 
             create_lab(token);
-        } else if(i_code == 5) {//daily chart
+        } else if(i_code == 6) {//daily chart
             char token[256] = {};
             printf("Enter the token number of the patient: ");
             scanf(" %s", token);
@@ -326,7 +344,7 @@ int main(void) {
             }
 
             see_health(token);
-        } else if(i_code == 6) {//lab result
+        } else if(i_code == 7) {//lab result
             char token[256] = {};
             printf("Enter the token number of the patient: ");
             scanf(" %s", token);
@@ -344,7 +362,7 @@ int main(void) {
             }
 
             see_lab(token);
-        } else if(i_code == 7) {//discharge
+        } else if(i_code == 8) {//discharge
             char cmd[256] = "GET ROW;patients;WHERE;token;";
             char patient_token[256] = "";
 
@@ -368,7 +386,9 @@ int main(void) {
                 strcat(log, " has been discharged");
                 add_log(log);
             }
-        } else if(i_code == 8) {//end day
+        } else if(i_code == 9) {//clear the screen
+            goto starting_phase;
+        }  else if(i_code == 10) {//end day
             printf("Are you sure you want to end your today's work day? (Y/n) ");
             char ans = 'n';
             scanf(" %c", &ans);
@@ -376,7 +396,7 @@ int main(void) {
             if(ans == 'Y') {
                 day_end();
             }
-        } else if(i_code == 9) {//password
+        } else if(i_code == 11) {//password
             char passwd[256] = {};
             
             printf("\nEnter a new password: ");
@@ -395,7 +415,117 @@ int main(void) {
 
             printf("\nThe password was changed successfully\n");
             add_log("Password was changed successfully");
-        } else if(i_code == 10) {//logout
+        } else if(i_code == 12) {//logout
+            add_log("Logout command from the user");
+            return 0;
+        }
+        printf("\nPress enter to continue...");
+        char c = getchar();
+        c = getchar();
+        goto instruction_phase;
+    } else if(strcmp(_env.role, "nurse") == 0) {
+        if(i_code == 1) {
+            char token[256] = {};
+            printf("Enter the token number of the patient: ");
+            scanf(" %s", token);
+
+            char cmd[256] = "GET ROW;patients;WHERE;token;";
+            strcat(cmd, token);
+
+            while(_db(cmd).code == 0) {
+                strcpy(token, "");
+                printf("Token not found!!\nPlease re-enter the token number of the patient: ");
+                scanf(" %s", token);
+
+                strcpy(cmd, "GET ROW;patients;WHERE;token;");
+                strcat(cmd, token);
+            }   
+
+            update_health(token);
+        } else if(i_code == 2) {
+            char token[256] = {};
+            printf("Enter the token number of the patient: ");
+            scanf(" %s", token);
+
+            char cmd[256] = "GET ROW;patients;WHERE;token;";
+            strcat(cmd, token);
+
+            while(_db(cmd).code == 0) {
+                strcpy(token, "");
+                printf("Token not found!!\nPlease re-enter the token number of the patient: ");
+                scanf(" %s", token);
+
+                strcpy(cmd, "GET ROW;patients;WHERE;token;");
+                strcat(cmd, token);
+            }
+
+            see_health(token);
+        } else if(i_code == 3) {
+            char token[256] = {};
+            printf("Enter the token number of the patient: ");
+            scanf(" %s", token);
+
+            char cmd[256] = "GET ROW;patients;WHERE;token;";
+            strcat(cmd, token);
+
+            while(_db(cmd).code == 0) {
+                strcpy(token, "");
+                printf("Token not found!!\nPlease re-enter the token number of the patient: ");
+                scanf(" %s", token);
+
+                strcpy(cmd, "GET ROW;patients;WHERE;token;");
+                strcat(cmd, token);
+            }
+
+            see_lab(token);
+        } else if(i_code == 4) {
+            char token[256] = {};
+            printf("Enter the token number of the patient: ");
+            scanf(" %s", token);
+
+            char cmd[256] = "GET ROW;patients;WHERE;token;";
+            strcat(cmd, token);
+
+            while(_db(cmd).code == 0) {
+                strcpy(token, "");
+                printf("Token not found!!\nPlease re-enter the token number of the patient: ");
+                scanf(" %s", token);
+
+                strcpy(cmd, "GET ROW;patients;WHERE;token;");
+                strcat(cmd, token);
+            }
+
+            see_medication(token);
+        } else if(i_code == 5) {
+            goto starting_phase; 
+        }  else if(i_code == 6) {//end day
+            printf("Are you sure you want to end your today's work day? (Y/n) ");
+            char ans = 'n';
+            scanf(" %c", &ans);
+
+            if(ans == 'Y') {
+                day_end();
+            }
+        } else if(i_code == 7) {//password
+            char passwd[256] = {};
+            
+            printf("\nEnter a new password: ");
+            scanf(" %s", passwd);
+
+            while(strlen(passwd)<6) {
+                printf("\nYour password is too weak.\nEnter a new strong password: ");
+                scanf(" %s", passwd);
+            }
+
+            char cmd[256] = "UPDATE ROW;users;WHERE;username;";
+            strcat(cmd, _env.logged_user);
+            strcat(cmd, ";AS;password;");
+            strcat(cmd, passwd);
+            _db(cmd);
+
+            printf("\nThe password was changed successfully\n");
+            add_log("Password was changed successfully");
+        } else if(i_code == 8) {//logout
             add_log("Logout command from the user");
             return 0;
         }
