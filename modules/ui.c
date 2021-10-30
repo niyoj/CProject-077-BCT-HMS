@@ -94,6 +94,8 @@ void print_instruction(int level) {
             printf("[5] => Change the password\n");
             printf("[6] => Logout\n\n\n");
             
+        } else {
+            printf("Your role doesnot matches to our database.\n");
         }
     } else if(level == 2) {
         //level = 2 shows the information for login to the user
@@ -160,8 +162,16 @@ int create_user() {
     scanf(" %s", username);                  //getting the nick name of the user which most be unique
     printf("Enter the password: ");
     scanf(" %s", passwd);                    //getting the password of the user
+    
     printf("Enter his/her role: ");
     scanf(" %s", role);                      //getting the admin of the user
+
+    while((strcmp(role, "admin") != 0 && strcmp(role, "nurse") != 0 && strcmp(role, "pharmacy") != 0 && strcmp(role, "reception") != 0 && strcmp(role, "laboratory") != 0 && strcmp(role, "doctor") != 0 )) {
+        strcpy(role, "");
+        printf("\nSorry, you entered the wrong role.\nThe name of the roles you can use are admin,reception,pharamcy,nurse,laboratory, and doctor.\n");
+        printf("Re-Enter his/her role: ");
+        scanf(" %s", role);                      //getting the admin of the user
+    }
 
     char cmd[256] = "GET ROW;users;WHERE;username;";
     strcat(cmd, username);
