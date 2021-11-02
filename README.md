@@ -19,7 +19,7 @@ Every data entered or saved in our program or in the project database is stored 
 * `README.md` : This file is for contributors to be read before starting contribution. It covers some brief explanation of our project.
 
 ## Before Contributing
-Before contributing to the project, you can look at the project's proposal for better understanding about the project, [from this link](https://drive.google.com/file/d/1uvEKRaumQtYOK4uz4cqk8jRVM7G-kg5s/view?usp=sharing).
+Before contributing to the project, you can look at the project's proposal for better understanding about the project, [from this link](https://drive.google.com/file/d/1uvEKRaumQtYOK4uz4cqk8jRVM7G-kg5s/view?usp=sharing). Also, here is the [demo video](https://drive.google.com/file/d/1Bm0yPcZvkcr1tBDbAD2Th6LryI7lrDSG/view?usp=sharing) of the program that will give you the basic idea of what our program really looks like.
 
 ## Tips Regarding the Project
 ### Proper Documentation Style of the Project
