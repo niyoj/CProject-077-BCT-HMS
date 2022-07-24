@@ -15,7 +15,7 @@ Every data entered or saved in our program or in the project database is stored 
 * `bin/` : This directory contains the compiled output of the project and this is what that is run by the  user. It contains executable file for both Windows system `.exe` and Unix system `.out`.
 * \*`modules/` : This directory contains files that has some user-defined functions used in our project. 
 * `.gitignore` : This file is used to ignore test executable files and swap files.
-* `main.c` : This file is the base of our project and contains function protoypes, declarations, includes header files, etc.
+* `main.c` : This file is the base of our project and contains function protoypes, declarations, includes header files etc.
 * `README.md` : This file is for contributors to be read before starting contribution. It covers some brief explanation of our project.
 
 ## Before Contributing
