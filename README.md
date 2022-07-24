@@ -40,4 +40,4 @@ This project has recieved major contribution of;
 * [Khemraj Shrestha](https://github.com/itsmekhemraj) \(THA077BCT020\)
 * [Niyoj Oli](https://github.com/niyoj) \(THA077BCT029\)
 * [Om Prakash Sharma](https://github.com/ompiepy) \(THA077BCT030\)
-* Punam Shrestha \(THA077BCT038\)
+* [Punam Shrestha](https://github.com/punamshrestha1) \(THA077BCT038\)
